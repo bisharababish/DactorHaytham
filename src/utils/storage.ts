@@ -20,7 +20,7 @@ export const initializeQuestions = (): void => {
 export const generateSampleQuestions = (): Question[] => {
   const questions: Question[] = [];
   const categories = ['Biology', 'Chemistry', 'Physics', 'Mathematics', 'Anatomy'];
-  
+
   for (let i = 1; i <= 100; i++) {
     questions.push({
       id: i.toString(),
@@ -35,7 +35,7 @@ export const generateSampleQuestions = (): Question[] => {
       category: categories[Math.floor(Math.random() * categories.length)]
     });
   }
-  
+
   return questions;
 };
 
@@ -76,7 +76,7 @@ export const createDefaultExams = (): Exam[] => {
     title,
     description: `Comprehensive examination covering ${title.toLowerCase()}`,
     questions: getRandomQuestions(10),
-    duration: 30,
+    duration: 10,
     isActive: true,
     moduleNumber: index + 1
   }));
@@ -102,13 +102,13 @@ export const getStudentAttempts = (studentId: string): ExamAttempt[] => {
 export const saveGrade = (grade: Grade): void => {
   const grades = getGrades();
   const existingGradeIndex = grades.findIndex(g => g.id === grade.id);
-  
+
   if (existingGradeIndex >= 0) {
     grades[existingGradeIndex] = grade;
   } else {
     grades.push(grade);
   }
-  
+
   localStorage.setItem(GRADES_KEY, JSON.stringify(grades));
 };
 
@@ -135,7 +135,7 @@ export const getChatMessages = (): ChatMessage[] => {
 
 export const getChatMessagesBetweenUsers = (userId1: string, userId2: string): ChatMessage[] => {
   const messages = getChatMessages();
-  return messages.filter(msg => 
+  return messages.filter(msg =>
     (msg.senderId === userId1 && msg.receiverId === userId2) ||
     (msg.senderId === userId2 && msg.receiverId === userId1)
   ).sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
@@ -149,12 +149,12 @@ export const getChatRooms = (): ChatRoom[] => {
 export const saveChatRoom = (room: ChatRoom): void => {
   const rooms = getChatRooms();
   const existingRoomIndex = rooms.findIndex(r => r.id === room.id);
-  
+
   if (existingRoomIndex >= 0) {
     rooms[existingRoomIndex] = room;
   } else {
     rooms.push(room);
   }
-  
+
   localStorage.setItem(CHAT_ROOMS_KEY, JSON.stringify(rooms));
 };

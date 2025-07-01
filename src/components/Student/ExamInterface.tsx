@@ -162,16 +162,16 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
                   key={index}
                   onClick={() => handleAnswerSelect(index)}
                   className={`w-full p-4 text-left rounded-lg border transition-all ${answers[currentQuestion] === index
-                      ? 'bg-blue-500/20 border-blue-500/50 text-white'
-                      : 'bg-white/5 border-white/20 text-white/80 hover:bg-white/10 hover:border-white/30'
+                    ? 'bg-blue-500/20 border-blue-500/50 text-white'
+                    : 'bg-white/5 border-white/20 text-white/80 hover:bg-white/10 hover:border-white/30'
                     }`}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                 >
                   <div className="flex items-center space-x-3">
                     <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${answers[currentQuestion] === index
-                        ? 'bg-blue-500 border-blue-500'
-                        : 'border-white/30'
+                      ? 'bg-blue-500 border-blue-500'
+                      : 'border-white/30'
                       }`}>
                       {answers[currentQuestion] === index && (
                         <CheckCircle className="h-4 w-4 text-white" />
@@ -204,10 +204,10 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
                 key={index}
                 onClick={() => setCurrentQuestion(index)}
                 className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${index === currentQuestion
-                    ? 'bg-blue-500 text-white'
-                    : answers[index] !== -1
-                      ? 'bg-green-500/50 text-white'
-                      : 'bg-white/20 text-white/70 hover:bg-white/30'
+                  ? 'bg-blue-500 text-white'
+                  : answers[index] !== -1
+                    ? 'bg-green-500/50 text-white'
+                    : 'bg-white/20 text-white/70 hover:bg-white/30'
                   }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}

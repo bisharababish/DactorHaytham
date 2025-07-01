@@ -90,8 +90,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedUserId, onSelectU
                   key={user.id}
                   onClick={() => onSelectUser(user.id)}
                   className={`w-full p-3 text-left rounded-lg transition-all ${selectedUserId === user.id
-                      ? 'bg-blue-500/20 border border-blue-500/30'
-                      : 'hover:bg-white/10'
+                    ? 'bg-blue-500/20 border border-blue-500/30'
+                    : 'hover:bg-white/10'
                     }`}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
@@ -172,8 +172,8 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ selectedUserId, onSelectU
                     >
                       <div
                         className={`max-w-xs px-4 py-2 rounded-2xl ${isOwn
-                            ? 'bg-gradient-to-r from-gray-700 to-black text-white'
-                            : 'bg-white/20 text-white'
+                          ? 'bg-gradient-to-r from-gray-700 to-black text-white'
+                          : 'bg-white/20 text-white'
                           }`}
                       >
                         <p className="text-sm">{message.message}</p>
