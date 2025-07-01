@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, BookOpen, Users, TrendingUp, Clock, Award, MessageCircle, User as UserIcon } from 'lucide-react';
+import { BookOpen, Users, TrendingUp, Clock, Award, MessageCircle, User as UserIcon } from 'lucide-react';
 
 // Components
 import Layout from './components/Layout';
@@ -14,7 +14,7 @@ import GradeManagement from './components/Doctor/GradeManagement';
 // Utils and Types
 import { isAuthenticated, getUser, isDoctorRole, getAllUsers } from './utils/auth';
 import { initializeQuestions, getExams, getStudentAttempts, getGrades, getStudentGrades } from './utils/storage';
-import { Exam, ExamAttempt, Grade, User } from './types';
+import { Exam, User } from './types';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -44,14 +44,14 @@ function App() {
     }
   };
 
-  const handleExamComplete = (attempt: ExamAttempt) => {
+  const handleExamComplete = () => {
     setCurrentExam(null);
     setCurrentPage('dashboard');
   };
 
   if (!isLoggedIn) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black flex items-center justify-center p-4">
         <AnimatePresence mode="wait">
           {showSignup ? (
             <SignupForm
@@ -92,7 +92,7 @@ function App() {
   const renderExams = () => {
     const exams = getExams();
     const attempts = getStudentAttempts(user!.id);
-    
+
     return (
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-white">Medical Examinations</h2>
@@ -100,7 +100,7 @@ function App() {
           {exams.map((exam, index) => {
             const attempt = attempts.find(a => a.examId === exam.id);
             const isLocked = index > 0 && !attempts.find(a => a.examId === exams[index - 1].id);
-            
+
             return (
               <ExamCard
                 key={exam.id}
@@ -126,7 +126,7 @@ function App() {
 
   const renderStudents = () => {
     const students = getAllUsers().filter(u => u.role === 'student');
-    
+
     return (
       <div className="space-y-6">
         <h2 className="text-2xl font-bold text-white">Students Overview</h2>
@@ -144,7 +144,7 @@ function App() {
       <div className="max-w-2xl mx-auto">
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-8">
           <div className="text-center mb-8">
-            <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-24 h-24 bg-gradient-to-r from-gray-700 to-black rounded-full flex items-center justify-center mx-auto mb-4">
               <UserIcon className="h-12 w-12 text-white" />
             </div>
             <h2 className="text-2xl font-bold text-white">{user?.name}</h2>
@@ -243,8 +243,8 @@ function App() {
 const DoctorDashboard: React.FC = () => {
   const students = getAllUsers().filter(u => u.role === 'student');
   const allGrades = getGrades();
-  const avgGrade = allGrades.length > 0 
-    ? allGrades.reduce((sum, grade) => sum + (grade.score / grade.maxScore * 100), 0) / allGrades.length 
+  const avgGrade = allGrades.length > 0
+    ? allGrades.reduce((sum, grade) => sum + (grade.score / grade.maxScore * 100), 0) / allGrades.length
     : 0;
 
   return (
@@ -295,7 +295,7 @@ const StudentDashboard: React.FC<{ onStartExam: (examId: string) => void }> = ({
   const exams = getExams();
   const attempts = getStudentAttempts(getUser()!.id);
   const grades = getStudentGrades(getUser()!.id);
-  
+
   const completedExams = attempts.length;
   const avgScore = attempts.length > 0
     ? attempts.reduce((sum, attempt) => sum + attempt.score, 0) / attempts.length
@@ -344,17 +344,16 @@ const StudentDashboard: React.FC<{ onStartExam: (examId: string) => void }> = ({
             {exams.slice(0, 3).map((exam, index) => {
               const attempt = attempts.find(a => a.examId === exam.id);
               const isLocked = index > 0 && !attempts.find(a => a.examId === exams[index - 1].id);
-              
+
               return (
                 <motion.div
                   key={exam.id}
-                  className={`p-3 rounded-lg border ${
-                    attempt 
-                      ? 'bg-green-500/20 border-green-500/30' 
-                      : isLocked
+                  className={`p-3 rounded-lg border ${attempt
+                    ? 'bg-green-500/20 border-green-500/30'
+                    : isLocked
                       ? 'bg-gray-500/20 border-gray-500/30'
                       : 'bg-blue-500/20 border-blue-500/30 cursor-pointer hover:bg-blue-500/30'
-                  } transition-all`}
+                    } transition-all`}
                   onClick={() => !attempt && !isLocked && onStartExam(exam.id)}
                   whileHover={!attempt && !isLocked ? { scale: 1.02 } : {}}
                 >
@@ -363,13 +362,12 @@ const StudentDashboard: React.FC<{ onStartExam: (examId: string) => void }> = ({
                       <div className="text-white font-medium">{exam.title}</div>
                       <div className="text-white/70 text-sm">{exam.questions.length} questions</div>
                     </div>
-                    <div className={`px-2 py-1 rounded text-xs font-medium ${
-                      attempt 
-                        ? 'bg-green-500 text-white' 
-                        : isLocked
+                    <div className={`px-2 py-1 rounded text-xs font-medium ${attempt
+                      ? 'bg-green-500 text-white'
+                      : isLocked
                         ? 'bg-gray-500 text-white'
                         : 'bg-blue-500 text-white'
-                    }`}>
+                      }`}>
                       {attempt ? 'Complete' : isLocked ? 'Locked' : 'Available'}
                     </div>
                   </div>
@@ -415,7 +413,7 @@ const StudentGrades: React.FC = () => {
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-bold text-white">My Grades</h2>
-      
+
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Exam Results */}
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6">
@@ -427,12 +425,11 @@ const StudentGrades: React.FC = () => {
                 <div key={attempt.id} className="p-4 bg-white/5 rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <div className="text-white font-medium">{exam?.title}</div>
-                    <div className={`text-lg font-bold ${
-                      attempt.score >= 90 ? 'text-green-400' :
+                    <div className={`text-lg font-bold ${attempt.score >= 90 ? 'text-green-400' :
                       attempt.score >= 80 ? 'text-blue-400' :
-                      attempt.score >= 70 ? 'text-yellow-400' :
-                      attempt.score >= 60 ? 'text-orange-400' : 'text-red-400'
-                    }`}>
+                        attempt.score >= 70 ? 'text-yellow-400' :
+                          attempt.score >= 60 ? 'text-orange-400' : 'text-red-400'
+                      }`}>
                       {Math.round(attempt.score)}%
                     </div>
                   </div>
@@ -459,12 +456,11 @@ const StudentGrades: React.FC = () => {
                     <div className="text-white font-medium">{grade.title}</div>
                     <div className="text-white/70 text-sm capitalize">{grade.type}</div>
                   </div>
-                  <div className={`text-lg font-bold ${
-                    (grade.score / grade.maxScore) >= 0.9 ? 'text-green-400' :
+                  <div className={`text-lg font-bold ${(grade.score / grade.maxScore) >= 0.9 ? 'text-green-400' :
                     (grade.score / grade.maxScore) >= 0.8 ? 'text-blue-400' :
-                    (grade.score / grade.maxScore) >= 0.7 ? 'text-yellow-400' :
-                    (grade.score / grade.maxScore) >= 0.6 ? 'text-orange-400' : 'text-red-400'
-                  }`}>
+                      (grade.score / grade.maxScore) >= 0.7 ? 'text-yellow-400' :
+                        (grade.score / grade.maxScore) >= 0.6 ? 'text-orange-400' : 'text-red-400'
+                    }`}>
                     {grade.score}/{grade.maxScore}
                   </div>
                 </div>
@@ -515,7 +511,7 @@ const StatsCard: React.FC<{
 const StudentCard: React.FC<{ student: User }> = ({ student }) => {
   const studentGrades = getStudentGrades(student.id);
   const studentAttempts = getStudentAttempts(student.id);
-  
+
   const avgGrade = studentGrades.length > 0
     ? studentGrades.reduce((sum, grade) => sum + (grade.score / grade.maxScore * 100), 0) / studentGrades.length
     : 0;
@@ -527,7 +523,7 @@ const StudentCard: React.FC<{ student: User }> = ({ student }) => {
       transition={{ duration: 0.2 }}
     >
       <div className="flex items-center space-x-4 mb-4">
-        <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+        <div className="w-12 h-12 bg-gradient-to-r from-gray-700 to-black rounded-full flex items-center justify-center">
           <UserIcon className="h-6 w-6 text-white" />
         </div>
         <div>
@@ -535,7 +531,7 @@ const StudentCard: React.FC<{ student: User }> = ({ student }) => {
           <p className="text-white/70 text-sm">{student.studentId}</p>
         </div>
       </div>
-      
+
       <div className="space-y-2">
         <div className="flex justify-between text-sm">
           <span className="text-white/70">Completed Exams</span>

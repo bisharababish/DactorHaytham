@@ -14,7 +14,7 @@ const ExamCard: React.FC<ExamCardProps> = ({ exam, attempt, onStartExam, isLocke
   const getStatusColor = () => {
     if (isLocked) return 'from-gray-500 to-gray-600';
     if (attempt) return 'from-green-500 to-green-600';
-    return 'from-blue-500 to-purple-600';
+    return 'from-gray-700 to-black';
   };
 
   const getStatusIcon = () => {
@@ -40,7 +40,7 @@ const ExamCard: React.FC<ExamCardProps> = ({ exam, attempt, onStartExam, isLocke
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-white mb-2">{exam.title}</h3>
           <p className="text-white/70 text-sm mb-3">{exam.description}</p>
-          
+
           <div className="flex items-center space-x-4 text-sm text-white/60">
             <div className="flex items-center space-x-1">
               <BookOpen className="h-4 w-4" />
@@ -52,7 +52,7 @@ const ExamCard: React.FC<ExamCardProps> = ({ exam, attempt, onStartExam, isLocke
             </div>
           </div>
         </div>
-        
+
         <div className="text-right">
           <div className="text-2xl font-bold text-white mb-1">
             {exam.moduleNumber}

@@ -70,12 +70,12 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
 
   const handleSubmit = async () => {
     if (isSubmitting) return;
-    
+
     setIsSubmitting(true);
-    
+
     const score = calculateScore();
     const duration = Math.round((Date.now() - startTime) / 1000 / 60); // Convert to minutes
-    
+
     const attempt: ExamAttempt = {
       id: Date.now().toString(),
       examId: exam.id,
@@ -96,7 +96,7 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
   const currentQ = exam.questions[currentQuestion];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 p-4">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl p-6 mb-6">
@@ -115,11 +115,10 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
                 <p className="text-white/70 text-sm">Question {currentQuestion + 1} of {exam.questions.length}</p>
               </div>
             </div>
-            
+
             <div className="flex items-center space-x-4">
-              <div className={`flex items-center space-x-2 px-3 py-2 rounded-lg ${
-                timeLeft < 300 ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'
-              }`}>
+              <div className={`flex items-center space-x-2 px-3 py-2 rounded-lg ${timeLeft < 300 ? 'bg-red-500/20 text-red-400' : 'bg-blue-500/20 text-blue-400'
+                }`}>
                 <Clock className="h-4 w-4" />
                 <span className="font-mono font-medium">{formatTime(timeLeft)}</span>
               </div>
@@ -129,7 +128,7 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
           {/* Progress Bar */}
           <div className="w-full bg-white/10 rounded-full h-2">
             <motion.div
-              className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
+              className="bg-gradient-to-r from-gray-700 to-black h-2 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}
@@ -162,20 +161,18 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
                 <motion.button
                   key={index}
                   onClick={() => handleAnswerSelect(index)}
-                  className={`w-full p-4 text-left rounded-lg border transition-all ${
-                    answers[currentQuestion] === index
+                  className={`w-full p-4 text-left rounded-lg border transition-all ${answers[currentQuestion] === index
                       ? 'bg-blue-500/20 border-blue-500/50 text-white'
                       : 'bg-white/5 border-white/20 text-white/80 hover:bg-white/10 hover:border-white/30'
-                  }`}
+                    }`}
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.99 }}
                 >
                   <div className="flex items-center space-x-3">
-                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                      answers[currentQuestion] === index
+                    <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${answers[currentQuestion] === index
                         ? 'bg-blue-500 border-blue-500'
                         : 'border-white/30'
-                    }`}>
+                      }`}>
                       {answers[currentQuestion] === index && (
                         <CheckCircle className="h-4 w-4 text-white" />
                       )}
@@ -206,13 +203,12 @@ const ExamInterface: React.FC<ExamInterfaceProps> = ({ exam, onComplete, onBack 
               <motion.button
                 key={index}
                 onClick={() => setCurrentQuestion(index)}
-                className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${
-                  index === currentQuestion
+                className={`w-8 h-8 rounded-full text-sm font-medium transition-all ${index === currentQuestion
                     ? 'bg-blue-500 text-white'
                     : answers[index] !== -1
-                    ? 'bg-green-500/50 text-white'
-                    : 'bg-white/20 text-white/70 hover:bg-white/30'
-                }`}
+                      ? 'bg-green-500/50 text-white'
+                      : 'bg-white/20 text-white/70 hover:bg-white/30'
+                  }`}
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
               >

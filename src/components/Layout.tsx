@@ -18,23 +18,23 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) =>
     window.location.reload();
   };
 
-  const navItems = isDoctor 
+  const navItems = isDoctor
     ? [
-        { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
-        { id: 'students', label: 'Students', icon: User },
-        { id: 'grades', label: 'Grades', icon: BookOpen },
-        { id: 'chat', label: 'Messages', icon: MessageCircle },
-      ]
+      { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
+      { id: 'students', label: 'Students', icon: User },
+      { id: 'grades', label: 'Grades', icon: BookOpen },
+      { id: 'chat', label: 'Messages', icon: MessageCircle },
+    ]
     : [
-        { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
-        { id: 'exams', label: 'Exams', icon: BookOpen },
-        { id: 'grades', label: 'My Grades', icon: BookOpen },
-        { id: 'chat', label: 'Chat', icon: MessageCircle },
-        { id: 'profile', label: 'Profile', icon: User },
-      ];
+      { id: 'dashboard', label: 'Dashboard', icon: GraduationCap },
+      { id: 'exams', label: 'Exams', icon: BookOpen },
+      { id: 'grades', label: 'My Grades', icon: BookOpen },
+      { id: 'chat', label: 'Chat', icon: MessageCircle },
+      { id: 'profile', label: 'Profile', icon: User },
+    ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black">
       {/* Navigation Bar */}
       <nav className="bg-white/10 backdrop-blur-md border-b border-white/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -51,11 +51,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) =>
                   <motion.button
                     key={item.id}
                     onClick={() => onNavigate(item.id)}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all ${
-                      currentPage === item.id
-                        ? 'bg-white/20 text-white'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
-                    }`}
+                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-all ${currentPage === item.id
+                      ? 'bg-white/20 text-white'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -93,11 +92,10 @@ const Layout: React.FC<LayoutProps> = ({ children, currentPage, onNavigate }) =>
                   <motion.button
                     key={item.id}
                     onClick={() => onNavigate(item.id)}
-                    className={`flex items-center space-x-1 px-3 py-2 rounded-lg whitespace-nowrap transition-all ${
-                      currentPage === item.id
-                        ? 'bg-white/20 text-white'
-                        : 'text-white/70 hover:text-white hover:bg-white/10'
-                    }`}
+                    className={`flex items-center space-x-1 px-3 py-2 rounded-lg whitespace-nowrap transition-all ${currentPage === item.id
+                      ? 'bg-white/20 text-white'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                      }`}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >

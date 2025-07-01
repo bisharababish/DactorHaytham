@@ -12,7 +12,7 @@ const GradeManagement: React.FC = () => {
   const [isAddingGrade, setIsAddingGrade] = useState(false);
   const [editingGrade, setEditingGrade] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  
+
   const [newGrade, setNewGrade] = useState({
     type: 'exam' as Grade['type'],
     title: '',
@@ -27,7 +27,7 @@ const GradeManagement: React.FC = () => {
     const allUsers = getAllUsers();
     const studentUsers = allUsers.filter(user => user.role === 'student');
     setStudents(studentUsers);
-    
+
     const allGrades = getGrades();
     setGrades(allGrades);
   }, []);
@@ -136,7 +136,7 @@ const GradeManagement: React.FC = () => {
               />
             </div>
           </div>
-          
+
           <div className="lg:w-64">
             <label className="block text-white/80 text-sm font-medium mb-2">
               Filter by Student
@@ -323,7 +323,7 @@ const GradeManagement: React.FC = () => {
                 >
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
+                      <div className="w-8 h-8 bg-gradient-to-r from-gray-700 to-black rounded-full flex items-center justify-center">
                         <User className="h-4 w-4 text-white" />
                       </div>
                       <div className="text-white font-medium">

@@ -66,7 +66,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onToggleForm }) => {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-          className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full mb-4"
+          className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-gray-700 to-black rounded-full mb-4"
         >
           <GraduationCap className="h-8 w-8 text-white" />
         </motion.div>
@@ -142,7 +142,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSuccess, onToggleForm }) => {
         <motion.button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-gradient-to-r from-gray-700 to-black hover:from-gray-800 hover:to-black text-white font-medium py-3 px-4 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
         >

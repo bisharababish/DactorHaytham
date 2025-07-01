@@ -130,22 +130,20 @@ const SignupForm: React.FC<SignupFormProps> = ({ onSuccess, onToggleForm }) => {
             <button
               type="button"
               onClick={() => setFormData({ ...formData, role: 'student' })}
-              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
-                formData.role === 'student'
+              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${formData.role === 'student'
                   ? 'bg-blue-500 text-white'
                   : 'bg-white/10 text-white/70 hover:bg-white/20'
-              }`}
+                }`}
             >
               Student
             </button>
             <button
               type="button"
               onClick={() => setFormData({ ...formData, role: 'doctor' })}
-              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${
-                formData.role === 'doctor'
-                  ? 'bg-purple-500 text-white'
+              className={`flex-1 py-2 px-3 rounded-lg text-sm font-medium transition-all ${formData.role === 'doctor'
+                  ? 'bg-black text-white'
                   : 'bg-white/10 text-white/70 hover:bg-white/20'
-              }`}
+                }`}
             >
               Doctor
             </button>
